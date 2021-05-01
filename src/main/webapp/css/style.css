@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto:wght@500&display=swap');
+
+/* fonts Cormorant Garamond family */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap");
+/* fonts montserrat family */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
+
+body {
+	background-color : #232323;
+	color: #cf9d4c;
+	font-family: "Montserrat", sans-serif;
+	font-size:19px;
+}
+#container {
+	background-color : #232323;
+	color: #cf9d4c;
+	/* font-family: "Montserrat", sans-serif; */
+	/* font-family: "Cormorant Garamond", sans-serif; */
+	font-family: "Montserrat", sans-serif;
+	font-size:19px;
+}
+
+nav {
+	background-color: #232323;
+}
+
+li{
+	color: #cf9d4c;
+}
+h1{
+	text-align:center;
+	font-family: 'Cormorant Garamond', serif;
+	margin-top:30px;
+	text-align:center;
+	font-size:55px;
+}
+h2{
+	text-align:center;
+	font-family: 'Cormorant Garamond', serif;
+	margin:30px;
+	text-align:center;
+	font-size:40px;
+}
+
+#link1, .navbar-toggler-icon, .avbar-toggler{
+	color: #cf9d4c;
+}
+ul li a:hover{
+	text-decoration:underline;
+}
+a:hover{
+	text-decoration:underline;
+	color:#cf9d4c;
+}
+a{
+	color:#cf9d4c;
+	text-decoration:none;
+}
+#btn{
+	color:#cf9d4c; 
+	border:1px solid #cf9d4c;
+	
+}
+#btn:hover{
+	background: #cf9d4c;
+	color: black;
+}
+#btn:after{
+	color: #004040;
+}
+
+.btn.btn-warning, .btn.btn-warning:visited{
+	background-color:#cf9d4c;
+	border:1px solid #cf9d4c;
+}
+.btn.btn-warning:hover, .btn.btn-warning:Active{
+	color:#cf9d4c;
+	background-color:#232323;
+}
+
+.table{
+	background-color:#c7c7ab;
+	text-align:center;
+}
+.table a{
+	color: #8f8f53;
+	text-decoration:underline;
+}
+
+.container-create{
+	display:flex;
+	flex-direction:column;
+	flex-wrap:wrap;
+ 	align-items:center; 
+ 	align-content:center; 
+	
+}
+.slider{
+	margin:20px;
+}
+#myCon{
+	display:none;
+	/* display:flex; */
+	flex-direction:horizontal;
+	flex-wrap:no-wrap;
+	
+}
+#slider{
+	width:30%;
+	
+}
+#filterGroup{
+	width:70%;
+}
+#reimbTable2{
+	display:none;
+}
+
+@media only screen and (max-width: 800px) {
+	#myCon{
+	display:flex;
+	flex-direction:vertical;
+	flex-wrap:wrap;
+	
+	}
+	#slider{
+	width:100%;
+	
+	}
+	#filterGroup{
+		width:100%;
+	}
+	
+	

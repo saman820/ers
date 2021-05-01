@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/ers/favicon-16x16.png">
+<meta charset="ISO-8859-1">
+<title>Create New Ticket</title>
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080/ers/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container" id="container">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/ers/back-home.ers"><img src="http://localhost:8080/ers/pics/logo3.png"
+					style="max-width: 130px"></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation" style="color:#cf9d4c; border:2px solid #cf9d4c;">
+					<span class="navbar-toggler-icon">
+					<i class="fa fa-navicon" style="color:#cf9d4c; font-size:28px;"></i>
+					</span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="create-reimb.ers" id="link1">Create new ticket | </a></li>
+						<li class="nav-item"><a class="nav-link" href="#" id="link1"> Help</a></li>
+						<li class="nav-item dropdown"></li>
+					</ul>
+					<div id="id2"><span>Hello </span></div><span> &nbsp; &nbsp;  </span>
+					<a href="logout.ers">Log out</a>
+
+				</div>
+			</div>
+		</nav>
+<!-- 		<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Success!</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  	</button>
+		</div> -->
+		
+		<div class="container-create">
+		<h2 >Create new reimbursement ticket</h2>
+		<form class="row g-3" action="/ers/add-reimb.ers" method="post" style="max-width:700px; text-align:left; ">
+		  <div class="col-md-8">
+		    <label for="inputEmail4" class="form-label">Amount</label>
+		    <input type="number" class="form-control" id="inputEmail4" name="amount" required>
+		  </div>
+		  <div class="col-md-4">
+		    <label for="inputCity" class="form-label">Currency</label>
+		     <select class="form-select" aria-label="Default select example" name="currency" required>
+			  <option value="CAD" selected>CAD</option>
+			  <option value="USD">USD</option>
+			  <option value="EUR">EUR</option>
+			  <option value="OTHER">OTHER</option>
+			</select>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="inputCity" class="form-label">Resolver</label>
+		     <select class="form-select" aria-label="Default select example" name="resolver" id="managers" required>
+			  <option selected disabled>Select Resolver</option>
+			</select>
+		  </div>
+		  <div class="col-md-6">
+		    <label for="inputState" class="form-label">Type</label>
+		    <select id="inputState" class="form-select" required name="type" required>
+		      <option selected disabled>Choose ...</option>
+		      <option value="1">FOOD</option>
+		      <option value="2">GAS</option>
+		      <option value="3">TAXI</option>
+		      <option value="4">BUS</option>
+		      <option value="5">AIR TRAVEL</option>
+		      <option value="6">CLOTHING</option>
+		      <option value="7">OTHER</option>
+		    </select>
+		  </div>
+  		  <div class="col-12">
+		    <label for="inputPassword4" class="form-label">Description</label>
+		    <textarea class="form-control" id="inputPassword4" rows="3" placeholder="..." name="description"></textarea>
+		  </div>
+		  <div class="col-12">
+		    <button type="submit" class="btn btn-warning">Submit</button>
+		  </div>
+		 </form>
+		 </div>
+	</div>
+
+	
+	<script type="text/javascript" src="js/create-reimb.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+		integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+		integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+		crossorigin="anonymous"></script>
+</body>
+</html>

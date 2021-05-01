@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link href="http://localhost:8080/ers/css/nouislider.css"
+	rel="stylesheet">
+<script src="http://localhost:8080/ers/js/nouislider.js"></script>
+
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="http://localhost:8080/ers/favicon-16x16.png">
+<meta charset="ISO-8859-1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=10, minimum-scale=.25, user-scalable=yes">
+<title>Update ticket</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/ers/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container" id="container">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/ers/back-home.ers"><img
+					src="http://localhost:8080/ers/pics/logo3.png"
+					style="max-width: 130px"></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation"
+					style="color: #cf9d4c; border: 2px solid #cf9d4c;">
+					<span class="navbar-toggler-icon"> <i class="fa fa-navicon"
+						style="color: #cf9d4c; font-size: 28px;"></i>
+					</span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="#" id="link1">Filter tickets </a></li>
+						<li class="nav-item dropdown"></li>
+					</ul>
+					<div id="id2">
+						<span>Hello </span>
+					</div>
+					<span> &nbsp; &nbsp; </span> <a href="logout.ers">Log out</a>
+
+				</div>
+			</div>
+		</nav>
+
+
+		<div id="myCon">
+			<div id="slider" class="slider" data-bs-toggle="dropdown"
+				aria-expanded="false">
+				<label for="slider-non-linear-step" class="priceSliderLabel">Amount
+					range: <span id="slider-non-linear-step-value"></span>
+				</label><br />
+				<div id="slider-non-linear-step"></div>
+			</div>
+			<div id="filterGroup" class="input-group mb-3">
+				<!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="bacKground-color:white;">Currency</button> -->
+				<!--   <ul class="dropdown-menu">
+		    <li><a class="dropdown-item" href="#">CAD</a></li>
+		    <li><a class="dropdown-item" href="#">USD</a></li>
+		    <li><a class="dropdown-item" href="#">EUR</a></li>
+		    <li><a class="dropdown-item" href="#">OTHER</a></li>
+		  </ul> -->
+				<!-- 		  <input type="text" class="form-control" aria-label="Text input with dropdown button"> -->
+
+
+
+				<select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="cur">
+					<option value="any" selected>Currency</option>
+					<option value="CAD">CAD</option>
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="OTHER">OTHER</option>
+				</select> <select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="auth">
+					<option value="any" selected>Author</option>
+				</select> <select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="stat">
+					<option value="any" selected>Status</option>
+					<option value="PENDING">PENDING</option>
+					<option value="MODIFY">MODIFY</option>
+					<option value="REJECTED">REJECTED</option>
+					<option value="APPROVED">APPROVED</option>
+					<option value="OTHER">OTHER</option>
+				</select> <select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="typ">
+					<option value="any" selected>Type</option>
+					<option value="FOOD">FOOD</option>
+					<option value="GAS">GAS</option>
+					<option value="TAXI">TAXI</option>
+					<option value="BUS">BUS</option>
+					<option value="AIR TRAVEL">AIR TRAVEL</option>
+					<option value="CLOTHING">CLOTHING</option>
+					<option value="OTHER">OTHER</option>
+				</select>
+
+			</div>
+			<div>
+				<button id="filterButton">Filter</button>
+			</div>
+		</div>
+
+		<h2 id="h2">Reimbursement tickets</h2>
+
+		<div class="table-responsive" style="margin: 40px auto;">
+			<table class="table table-hover" id="reimbTable">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Amount</th>
+						<th scope="col">Currency</th>
+						<th scope="col">Submission date</th>
+						<th scope="col">Resolved date</th>
+						<th scope="col">Description</th>
+						<th scope="col">Author</th>
+						<th scope="col">Status</th>
+						<th scope="col">Type</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="js/fhome.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+		integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+		integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+		crossorigin="anonymous"></script>
+</body>
+</html>
