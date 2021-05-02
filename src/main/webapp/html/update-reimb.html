@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Cache-control" content="no-cache">
+<!-- <meta http-equiv="Cache-control" content="no-cache"> -->
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/ers/favicon-16x16.png">
 <meta charset="ISO-8859-1">
 <title>Update ticket</title>
@@ -48,8 +48,10 @@
 		
 		<div class="container-create">
 		<h2 >Update reimbursement ticket</h2>
-		<form class="row g-3" action="/ers/edit-reimb.ers" method="post" style="max-width:700px; text-align:left; ">
-		  <div class="col-md-6">
+		<img id="rec" src="http://localhost:8080/ers/pics/empty.png">
+		<img id="rec2" src="http://localhost:8080/ers/pics/empty.png">
+		<form class="row g-3" action="/ers/edit-reimb.ers" method="post" style="max-width:700px; text-align:left; " enctype="multipart/form-data">
+		  <div class="col-md-3">
 		    <label for="inputEmail4" class="form-label">Amount</label>
 		    <input type="number" class="form-control" id="amount" name="amount" required>
 		  </div>
@@ -75,7 +77,7 @@
 		      <option value="7">OTHER</option>
 		    </select>
 		  </div>
-		  <div class="col-md-4">
+		  <div class="col-md-3">
 		    <label for="inputCity" class="form-label">Author</label>
 		     <select class="form-select" aria-label="Default select example" name="author" disabled id="author">
 			  <option selected value="">Select Author</option>
@@ -98,6 +100,10 @@
 		      <option value="5">OTHER</option>
 			</select>
 		  </div>
+		   <div class="col-md-4">
+		    <label for="file" class="form-label">Upload receipt</label>
+		    <input type="file" class="form-control" id="file" name="file">
+		  </div>
 
   		  <div class="col-12">
 		    <label for="inputPassword4" class="form-label">Description</label>
@@ -113,6 +119,8 @@
 		 </div>
 	</div>
 
+
+	
 	
 	<script type="text/javascript" src="js/updateReimb.js"></script>
 	<script

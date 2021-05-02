@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Cache-control" content="no-cache">
+<!-- <meta http-equiv="Cache-control" content="no-cache"> -->
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:8080/ers/favicon-16x16.png">
 <meta charset="ISO-8859-1">
 <title>Create New Ticket</title>
@@ -48,7 +48,7 @@
 		
 		<div class="container-create">
 		<h2 >Create new reimbursement ticket</h2>
-		<form class="row g-3" action="/ers/add-reimb.ers" method="post" style="max-width:700px; text-align:left; ">
+		<form class="row g-3" action="/ers/add-reimb.ers" method="post" style="max-width:700px; text-align:left; " enctype="multipart/form-data">
 		  <div class="col-md-8">
 		    <label for="inputEmail4" class="form-label">Amount</label>
 		    <input type="number" class="form-control" id="inputEmail4" name="amount" required>
@@ -62,13 +62,13 @@
 			  <option value="OTHER">OTHER</option>
 			</select>
 		  </div>
-		  <div class="col-md-6">
+		  <div class="col-md-4">
 		    <label for="inputCity" class="form-label">Resolver</label>
 		     <select class="form-select" aria-label="Default select example" name="resolver" id="managers" required>
 			  <option selected disabled>Select Resolver</option>
 			</select>
 		  </div>
-		  <div class="col-md-6">
+		  <div class="col-md-4">
 		    <label for="inputState" class="form-label">Type</label>
 		    <select id="inputState" class="form-select" required name="type" required>
 		      <option selected disabled>Choose ...</option>
@@ -80,6 +80,10 @@
 		      <option value="6">CLOTHING</option>
 		      <option value="7">OTHER</option>
 		    </select>
+		  </div>
+		  <div class="col-md-4">
+		    <label for="file" class="form-label">Upload receipt</label>
+		    <input type="file" class="form-control" id="file" name="file">
 		  </div>
   		  <div class="col-12">
 		    <label for="inputPassword4" class="form-label">Description</label>

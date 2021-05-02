@@ -1,6 +1,14 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
 
 import com.example.dao.ReimbDaoImpl;
 import com.example.dao.ReimbUserDaoImpl;
@@ -66,15 +74,20 @@ public class Controller {
 			return "html/create-reimb.html";
 		return "html/index.html";
 	}
-	public String addReimb(HttpServletRequest req) {
+	public String addReimb(HttpServletRequest req) throws IOException, ServletException {
 		if(req.getSession().getAttribute("currentUser")!=null){
+			
+			Part filePart = req.getPart("file");
+//			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+			InputStream fileContent = filePart.getInputStream();
+			byte[] image = IOUtils.toByteArray(fileContent);			
 			double amount = Double.parseDouble(req.getParameter("amount"));
 			String currency = req.getParameter("currency");
 			int resolverId= new ReimbUserDaoImpl().getOneByUserName(req.getParameter("resolver")).getId();
 			int typeId = Integer.parseInt(req.getParameter("type"));
 			String description = req.getParameter("description");
 			int authorId = ((ErsUser) req.getSession().getAttribute("currentUser")).getId();
-			ErsReimbursement newReimb = new ErsReimbursement(amount,currency, description,authorId,resolverId,typeId);
+			ErsReimbursement newReimb = new ErsReimbursement(amount,currency, description,image,authorId,resolverId,typeId);
 			new ReimbDaoImpl().insert(newReimb);
 			return "html/home.html";
 		}	
@@ -125,15 +138,20 @@ public class Controller {
 		}
 		return "html/index.html";
 	}
-	public String editReimb(HttpServletRequest req) {
+	public String editReimb(HttpServletRequest req) throws IOException, ServletException {
 		if(req.getSession().getAttribute("currentUser")!=null) {
+			Part filePart = req.getPart("file");
+//			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+			InputStream fileContent = filePart.getInputStream();
+			byte[] image = IOUtils.toByteArray(fileContent);
+			
 			double amount = Double.parseDouble(req.getParameter("amount"));
 			String currency = req.getParameter("currency");
 			int resolverId= new ReimbUserDaoImpl().getOneByUserName(req.getParameter("resolver")).getId();
 			int typeId = Integer.parseInt(req.getParameter("type"));
 			String description = req.getParameter("description");
 			ErsReimbursement cReimb = new ReimbDaoImpl().getOne(((ErsReimbursement) req.getSession().getAttribute("currentReimb")).getId());
-			ErsReimbursement newReimb = new ErsReimbursement(amount,currency, description,resolverId,typeId);
+			ErsReimbursement newReimb = new ErsReimbursement(amount,currency, description,image,resolverId,typeId);
 			new ReimbDaoImpl().update(cReimb.getId(), newReimb);
 			return "html/home.html";
 		}

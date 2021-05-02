@@ -128,7 +128,13 @@ a{
 #reimbTable2{
 	display:none;
 }
-
+#rec{
+	max-width:200px;
+}
+#rec2{
+	max-width:700px;
+	display:none;
+}
 @media only screen and (max-width: 800px) {
 	#myCon{
 	display:flex;

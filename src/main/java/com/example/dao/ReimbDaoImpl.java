@@ -27,7 +27,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			ResultSet rs = ps.executeQuery();
 			new Logging().log.debug("in Dao");
 			while(rs.next()) {
-				reimbList.add(new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) ));
+				reimbList.add(new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) ));
 			}
 			
 		}catch(SQLException e) {
@@ -45,7 +45,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			ResultSet rs = ps.executeQuery();
 			new Logging().log.debug("in Dao");
 			while(rs.next()) {
-				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
+				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 				rei.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getResolverId()).getUserName());
 				rei.setAuthorUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getAuthorId()).getUserName());
 				reimbList.add(rei);
@@ -66,7 +66,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			ResultSet rs = ps.executeQuery();
 			new Logging().log.debug("in Dao");
 			while(rs.next()) {
-				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
+				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 				rei.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getResolverId()).getUserName());
 				rei.setAuthorUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getAuthorId()).getUserName());
 				reimbList.add(rei);
@@ -88,7 +88,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			ResultSet rs = ps.executeQuery();
 			new Logging().log.debug("in Dao");
 			while(rs.next()) {
-				reimb=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
+				reimb=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 			}
 			
 		}catch(SQLException e) {
@@ -101,14 +101,15 @@ public class ReimbDaoImpl implements ReimbDao{
 	@Override
 	public void update(int id, ErsReimbursement reimb) {
 		try(Connection con= reimbCon.getDbConnection()){
-			String sql= "UPDATE ers_reimbursement SET reimb_amount=?, reimb_currency=?, reimb_description=?, reimb_resolver=?, reimb_type_id=?  WHERE reimb_id=?";
+			String sql= "UPDATE ers_reimbursement SET reimb_amount=?, reimb_currency=?, reimb_description=?, reimb_resolver=?, reimb_type_id=?, reimb_receipt=?  WHERE reimb_id=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setDouble(1, reimb.getAmount());
 			ps.setString(2, reimb.getErsCurrency());
 			ps.setString(3, reimb.getDescription());
 			ps.setInt(4, reimb.getResolverId());
 			ps.setInt(5, reimb.getTypeId());
-			ps.setInt(6, id);
+			ps.setBytes(6, reimb.getReceipt());
+			ps.setInt(7, id);
 			ps.executeUpdate();
 			new Logging().log.debug("in Dao");
 		}catch(SQLException e) {
@@ -139,15 +140,16 @@ public class ReimbDaoImpl implements ReimbDao{
 	@Override
 	public void insert(ErsReimbursement reimb) {
 		try(Connection con = reimbCon.getDbConnection()){
-			String sql = "{? = call create_reimbursement_with_desc (?,?,?,?,?,?)}";
+			String sql = "{? = call create_reimbursement_with_img (?,?,?,?,?,?,?)}";
 			CallableStatement cs =  con.prepareCall(sql);
 			cs.registerOutParameter(1, Types.VARCHAR);
 			cs.setDouble(2, reimb.getAmount());
 			cs.setString(3, reimb.getErsCurrency());
-			cs.setString(4, reimb.getDescription());
-			cs.setInt(5, reimb.getAuthorId());
-			cs.setInt(6, reimb.getResolverId());
-			cs.setInt(7, reimb.getTypeId());
+			cs.setBytes(4, reimb.getReceipt());
+			cs.setString(5, reimb.getDescription());
+			cs.setInt(6, reimb.getAuthorId());
+			cs.setInt(7, reimb.getResolverId());
+			cs.setInt(8, reimb.getTypeId());
 			cs.execute();
 			new Logging().log.debug("in Dao");
 		}catch(SQLException e) {
@@ -155,6 +157,25 @@ public class ReimbDaoImpl implements ReimbDao{
 			new Logging().log.error(e.getMessage());
 		}
 	}
+//	@Override
+//	public void insert(ErsReimbursement reimb) {
+//		try(Connection con = reimbCon.getDbConnection()){
+//			String sql = "{? = call create_reimbursement_with_desc (?,?,?,?,?,?)}";
+//			CallableStatement cs =  con.prepareCall(sql);
+//			cs.registerOutParameter(1, Types.VARCHAR);
+//			cs.setDouble(2, reimb.getAmount());
+//			cs.setString(3, reimb.getErsCurrency());
+//			cs.setString(4, reimb.getDescription());
+//			cs.setInt(5, reimb.getAuthorId());
+//			cs.setInt(6, reimb.getResolverId());
+//			cs.setInt(7, reimb.getTypeId());
+//			cs.execute();
+//			new Logging().log.debug("in Dao");
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//			new Logging().log.error(e.getMessage());
+//		}
+//	}
 
 	@Override
 	public void delete(int reimbId) {

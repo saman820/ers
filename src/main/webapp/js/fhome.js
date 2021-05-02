@@ -46,29 +46,23 @@ function tableFiller(reimbs, tableId) {
 			let newTR = document.createElement('tr');
 			newTR.id = `${reimb["id"]}${counter}`;
 			let idTD = document.createElement('td');
-			/*let idText = document.createTextNode(`${reimb["id"]}`);
-			idTD.appendChild(idText);*/
-			idTD.innerHTML = `<a href="fupdate-reimb.ers?currentReimbId=${reimb["id"]}">${reimb["id"]}</a>`;
+			let imTD=document.createElement('td');
+			idTD.innerHTML=`<a href="update-reimb.ers?currentReimbId=${reimb["id"]}">${reimb["id"]}</a>`;
+			if(reimb.receipt==""){
+				imTD.innerHTML=" ";
+			}else{
+				imTD.innerHTML=`<img style="max-width:25px;" src="data:image/jpeg;base64,${reimb.receipt}">`;
+			}
+			
 			newTR.append(idTD);
+			newTR.append(imTD);
 			for (let i in reimb) {
-				if (i == "id" || i == "resolverUserName" || i == "resolverId" || i == "authorId") {
-					continue;
-				}
-				if (i == "resolverUserName") {
-					continue;
-				}
-				if (i == "resolverId") {
-					continue;
-				}
-				if (i == "authorId") {
+				if (i == "id" || i == "resolverUserName" || i == "resolverId" || i == "authorId"||i=="receipt") {
 					continue;
 				}
 				if (i == "submitted" || i == "resolved") {
 					reimb[i] = reimb[i].substring(0, 10);
 				}
-				/*			if(i=="resolved"){
-								reimb[i]=reimb[i].substring(0,10);
-							}*/
 				if (reimb["description"] == null || reimb["description"] == "") {
 					reimb["description"] = "-";
 				}

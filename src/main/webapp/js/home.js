@@ -26,27 +26,20 @@ async function getUserReimbs(){
 	for(reimb of reimbs){
 		let newTR= document.createElement('tr');
 		let idTD=document.createElement('td');
-		/*let idText = document.createTextNode(`${reimb["id"]}`);
-		idTD.appendChild(idText);*/
+		let imTD=document.createElement('td');
 		idTD.innerHTML=`<a href="update-reimb.ers?currentReimbId=${reimb["id"]}">${reimb["id"]}</a>`;
+		if(reimb.receipt==""){
+			imTD.innerHTML=" ";
+		}else{
+			imTD.innerHTML=`<img style="max-width:25px;" src="data:image/jpeg;base64,${reimb.receipt}">`;
+		}		
 		newTR.append(idTD);
+		newTR.append(imTD);
 		for(let i in reimb){
-			if(i=="id"){
+			if(i == "id" || i == "resolverUserName" || i == "resolverId" || i == "authorId" ||i=="receipt"){
 				continue;
 			}
-			if(i=="authorUserName"){
-				continue;
-			}
-			if(i=="resolverId"){
-				continue;
-			}
-			if(i=="authorId"){
-				continue;
-			}
-			if(i=="submitted"){
-				reimb[i]=reimb[i].substring(0,10);
-			}
-			if(i=="resolved"){
+			if(i=="submitted"|| i == "resolved"){
 				reimb[i]=reimb[i].substring(0,10);
 			}
 			if(reimb["description"]==null || reimb["description"]==""){

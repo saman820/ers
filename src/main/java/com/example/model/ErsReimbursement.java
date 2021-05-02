@@ -1,6 +1,7 @@
 package com.example.model;
 
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
 public class ErsReimbursement {
 //	enum currency{
@@ -18,7 +19,7 @@ public class ErsReimbursement {
 	private String submitted;
 	private String resolved;
 	private String description;
-	private BufferedImage receipt;
+	private byte[] receipt;
 	private int authorId;
 	private String authorUserName;
 	private int resolverId;
@@ -98,6 +99,29 @@ public class ErsReimbursement {
 	public void setTypeId(int typeID) {
 		this.typeId = typeID;
 	}
+	
+	
+	public byte[] getReceipt() {
+		return receipt;
+	}
+	public void setReceipt(byte[] receipt) {
+		this.receipt = receipt;
+	}
+	public ErsReimbursement(int id, double amount, String ersCurrency, String submitted, String resolved, String description,
+			byte[] image,int authorId, int resolverId, int statusId, int typeID) {
+		super();
+		this.id=id;
+		this.amount = amount;
+		this.ersCurrency = ersCurrency;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.description = description;
+		this.receipt=image;
+		this.authorId = authorId;
+		this.resolverId = resolverId;
+		this.statusId = statusId;
+		this.typeId = typeID;
+	}
 	public ErsReimbursement(int id, double amount, String ersCurrency, String submitted, String resolved, String description,
 			int authorId, int resolverId, int statusId, int typeID) {
 		super();
@@ -146,6 +170,15 @@ public class ErsReimbursement {
 		this.resolverId = resolverId;
 		this.typeId = typeID;
 	}
+	public ErsReimbursement(double amount, String ersCurrency, String description,byte[] image ,int resolverId, int typeID) {
+		super();
+		this.amount = amount;
+		this.ersCurrency = ersCurrency;
+		this.description = description;
+		this.resolverId = resolverId;
+		this.typeId = typeID;
+		this.receipt=image;
+	}
 	
 	public ErsReimbursement(double amount, String ersCurrency, int authorId, int resolverId, int typeID) {
 		super();
@@ -156,6 +189,19 @@ public class ErsReimbursement {
 		this.typeId = typeID;
 	}
 	
+	
+	
+	public ErsReimbursement(double amount, String ersCurrency, String description, byte[] receipt, int authorId,
+			int resolverId, int typeId) {
+		super();
+		this.amount = amount;
+		this.ersCurrency = ersCurrency;
+		this.description = description;
+		this.receipt = receipt;
+		this.authorId = authorId;
+		this.resolverId = resolverId;
+		this.typeId = typeId;
+	}
 	@Override
 	public String toString() {
 		return "ErsReimbursement [id=" + id + ", amount=" + amount + ", ersCurrency=" + ersCurrency + ", submitted="

@@ -34,6 +34,10 @@ async function getManagers(){
 	if(reimb.description!=null){document.getElementById('description').value= reimb.description;}
 	if(reimb.typeId!=null){selectItemByValue(document.getElementById('typee'),reimb.typeId);}
 	if(reimb.statusId!=null){selectItemByValue(document.getElementById('status'),reimb.statusId);}
+	if(reimb.receipt!=""){
+		document.getElementById("rec").setAttribute('src',`data:image/jpeg;base64,${reimb.receipt}`);
+		document.getElementById("rec2").setAttribute('src',`data:image/jpeg;base64,${reimb.receipt}`);
+	}
 }
 	
 async function getAuthors(){
@@ -55,3 +59,22 @@ async function getAuthors(){
     }
   }
 
+
+
+
+document.getElementById("rec").addEventListener("click",function(){
+	if(document.getElementById("rec2").style.display==''
+		||document.getElementById("rec2").style.display=='none'){
+		document.getElementById("rec").style.display="none";
+		document.getElementById("rec2").style.display="block";
+		return false;
+	}
+})
+document.getElementById("rec2").addEventListener("click",function(){
+	if(document.getElementById("rec").style.display==''
+		||document.getElementById("rec").style.display=='none'){
+		document.getElementById("rec2").style.display="none";
+		document.getElementById("rec").style.display="block";
+		}
+		return false;
+})
