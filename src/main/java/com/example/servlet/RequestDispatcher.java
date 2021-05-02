@@ -24,7 +24,6 @@ public class RequestDispatcher {
 		case "/ers/home.ers" :
 			return controller.login(req);
 		case "/ers/back-home.ers" :
-			System.out.println("it works");
 			return controller.homer(req);
 		case "/ers/logout.ers":
 			return controller.logOut(req);

@@ -9,6 +9,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.Logging;
 import com.example.model.ErsReimbursement;
 
 public class ReimbDaoImpl implements ReimbDao{
@@ -24,12 +25,14 @@ public class ReimbDaoImpl implements ReimbDao{
 			String sql = "select * from ers_reimbursement";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+			new Logging().log.debug("in Dao");
 			while(rs.next()) {
 				reimbList.add(new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) ));
 			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 		return reimbList;
 	}
@@ -40,6 +43,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, authorId);
 			ResultSet rs = ps.executeQuery();
+			new Logging().log.debug("in Dao");
 			while(rs.next()) {
 				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 				rei.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getResolverId()).getUserName());
@@ -49,6 +53,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 		return reimbList;
 	}
@@ -59,6 +64,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, resolverId);
 			ResultSet rs = ps.executeQuery();
+			new Logging().log.debug("in Dao");
 			while(rs.next()) {
 				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 				rei.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getResolverId()).getUserName());
@@ -67,6 +73,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 		return reimbList;
 	}
@@ -79,12 +86,14 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
+			new Logging().log.debug("in Dao");
 			while(rs.next()) {
 				reimb=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 		return reimb;
 	}
@@ -101,8 +110,10 @@ public class ReimbDaoImpl implements ReimbDao{
 			ps.setInt(5, reimb.getTypeId());
 			ps.setInt(6, id);
 			ps.executeUpdate();
+			new Logging().log.debug("in Dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 	}
 	
@@ -118,8 +129,10 @@ public class ReimbDaoImpl implements ReimbDao{
 			ps.setInt(1, statusId);
 			ps.setInt(2, reimbId);	
 			ps.executeUpdate();
+			new Logging().log.debug("in Dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 	}
 
@@ -136,9 +149,10 @@ public class ReimbDaoImpl implements ReimbDao{
 			cs.setInt(6, reimb.getResolverId());
 			cs.setInt(7, reimb.getTypeId());
 			cs.execute();
-			
+			new Logging().log.debug("in Dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 	}
 
@@ -149,8 +163,10 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, reimbId);
 			ps.executeUpdate();		
+			new Logging().log.debug("in Dao");
 		}catch(SQLException e) {
 			e.printStackTrace();
+			new Logging().log.error(e.getMessage());
 		}
 	}
 

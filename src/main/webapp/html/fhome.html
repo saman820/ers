@@ -58,22 +58,57 @@
 		<div id="myCon">
 			<div id="slider" class="slider" data-bs-toggle="dropdown"
 				aria-expanded="false">
-				<label for="slider-non-linear-step" class="priceSliderLabel">Amount
+				<label id="sliderlabel" for="slider-non-linear-step" class="priceSliderLabel">Amount
 					range: <span id="slider-non-linear-step-value"></span>
 				</label><br />
 				<div id="slider-non-linear-step"></div>
 			</div>
-			<div id="filterGroup" class="input-group mb-3">
-				<!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="bacKground-color:white;">Currency</button> -->
-				<!--   <ul class="dropdown-menu">
-		    <li><a class="dropdown-item" href="#">CAD</a></li>
-		    <li><a class="dropdown-item" href="#">USD</a></li>
-		    <li><a class="dropdown-item" href="#">EUR</a></li>
-		    <li><a class="dropdown-item" href="#">OTHER</a></li>
-		  </ul> -->
-				<!-- 		  <input type="text" class="form-control" aria-label="Text input with dropdown button"> -->
+			<div>
+				<select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="cur">
+					<option value="any" selected>Currency</option>
+					<option value="CAD">CAD</option>
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="OTHER">OTHER</option>
+				</select>
+			</div>
+			<div>
+				<select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="auth">
+					<option value="any" selected>Author</option>
+				</select>
+			</div>
+			<div>
+				<select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="stat">
+					<option value="any" selected>Status</option>
+					<option value="PENDING">PENDING</option>
+					<option value="MODIFY">MODIFY</option>
+					<option value="REJECTED">REJECTED</option>
+					<option value="APPROVED">APPROVED</option>
+					<option value="OTHER">OTHER</option>
+				</select>
+			</div>
+			<div>
+				<select class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" name="currency" required id="typ">
+					<option value="any" selected>Type</option>
+					<option value="FOOD">FOOD</option>
+					<option value="GAS">GAS</option>
+					<option value="TAXI">TAXI</option>
+					<option value="BUS">BUS</option>
+					<option value="AIR TRAVEL">AIR TRAVEL</option>
+					<option value="CLOTHING">CLOTHING</option>
+					<option value="OTHER">OTHER</option>
+				</select>
+			</div>
+			<!-- <select id="filterButton" class="dropdown-toggle" data-bs-toggle="dropdown"
+					aria-expanded="false" >
+				<option selected>Filter</option>
+			</select> -->
 
-
+			<!-- <div id="filterGroup" class="input-group mb-3">
 
 				<select class="dropdown-toggle" data-bs-toggle="dropdown"
 					aria-expanded="false" name="currency" required id="cur">
@@ -105,8 +140,10 @@
 					<option value="OTHER">OTHER</option>
 				</select>
 
-			</div>
-			<div>
+			</div> -->
+			
+			
+			<div id="butto">
 				<button id="filterButton">Filter</button>
 			</div>
 		</div>

@@ -99,6 +99,18 @@ a{
 .slider{
 	margin:20px;
 }
+#sliderlabel{
+	padding:20px;
+}
+#cur,#auth,#stat,#typ{
+	margin-top:80px;
+	margin-right:10px;
+}
+#filterButton{
+	margin:80px;
+	height:28px;
+	margin-left:200px;	
+}
 #myCon{
 	display:none;
 	/* display:flex; */

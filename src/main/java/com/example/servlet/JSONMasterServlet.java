@@ -71,6 +71,10 @@ public class JSONMasterServlet extends HttpServlet{
 		case "/ers/serv2/getCurrentreimb":
 			ErsReimbursement cReimb = (ErsReimbursement) req.getSession().getAttribute("currentReimb");
 			res.getWriter().write(new ObjectMapper().writeValueAsString(cReimb));
+			break;
+		default:
+			System.out.println("it works");
+			req.getRequestDispatcher(new RequestDispatcher().process(req)).forward(req,res);
 		}
 		
 			

@@ -44,6 +44,7 @@ public class Controller {
 	public String logOut(HttpServletRequest req) {
 		req.getSession().setAttribute("currentUser", null);
 		req.getSession().setAttribute("userName", null);
+		req.getSession().invalidate(); 
 		return "html/index.html";
 	}
 	public String createUser(HttpServletRequest req) {

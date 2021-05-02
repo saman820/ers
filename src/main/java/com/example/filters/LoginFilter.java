@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.servlet.RequestDispatcher;
+
 @WebFilter("/loginFilter")
 public class LoginFilter implements Filter {
 
@@ -30,12 +32,20 @@ public class LoginFilter implements Filter {
 		String uri = req.getRequestURI();
 		System.out.println(uri);
 		String session = (String) req.getSession().getAttribute("userName");
-		/*
-		 * if (session == null && !(uri.endsWith("index.html") ||
-		 * uri.endsWith("home.ers")) && !(uri.endsWith("html") || uri.endsWith("ers"))
-		 * ){ res.sendRedirect("index.html"); }else{ chain.doFilter(request, response);
-		 * }
-		 */
+		
+//		if (session == null && !(uri.endsWith("index.html") 
+//		|| uri.endsWith("home.ers")) && !(uri.endsWith("html") || uri.endsWith("ers")
+//		)){ res.sendRedirect("index.html"); }else{ chain.doFilter(request, response);
+//		}
+		if (session == null 
+				&& !(uri.endsWith("index.html")) 
+				&& !(uri.endsWith("home.ers"))
+				) {
+			res.sendRedirect("/ers/logout.ers");
+		}else {
+			chain.doFilter(request, response);
+		}
+		
 	}
 
 	public void destroy() {
