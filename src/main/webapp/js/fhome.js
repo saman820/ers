@@ -2,9 +2,23 @@ let counter = 0;
 let reimbs;
 let dumVar=[];
 window.onload = function() {
+	getMessage();
 	getUser();
 	getUserReimbs();
 }
+
+async function getMessage(){
+	let mes= await fetch("http://localhost:8080/ers/serv2/getMessage");
+	mes = await mes.json();
+	let mesCla= await fetch("http://localhost:8080/ers/serv2/getMessageClass");
+	mesCla = await mesCla.json();
+	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
+		document.getElementById("alertMessage").innerHTML=  `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+	}
+}
+
+
+
 /*let rs="";*/
 rsRef = [];
 
@@ -47,11 +61,11 @@ function tableFiller(reimbs, tableId) {
 			newTR.id = `${reimb["id"]}${counter}`;
 			let idTD = document.createElement('td');
 			let imTD=document.createElement('td');
-			idTD.innerHTML=`<a href="update-reimb.ers?currentReimbId=${reimb["id"]}">${reimb["id"]}</a>`;
+			idTD.innerHTML=`<a href="fupdate-reimb.ers?currentReimbId=${reimb["id"]}">${reimb["id"]}</a>`;
 			if(reimb.receipt==""){
 				imTD.innerHTML=" ";
 			}else{
-				imTD.innerHTML=`<img style="max-width:25px;" src="data:image/jpeg;base64,${reimb.receipt}">`;
+				imTD.innerHTML=`<img style="max-width:25px; max-height:25px;" src="data:image/jpeg;base64,${reimb.receipt}">`;
 			}
 			
 			newTR.append(idTD);

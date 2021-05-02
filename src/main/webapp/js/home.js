@@ -1,8 +1,18 @@
 window.onload = function(){
+	getMessage();
 	getUser();
 	getUserReimbs();
 }
 
+async function getMessage(){
+	let mes= await fetch("http://localhost:8080/ers/serv2/getMessage");
+	mes = await mes.json();
+	let mesCla= await fetch("http://localhost:8080/ers/serv2/getMessageClass");
+	mesCla = await mesCla.json();
+	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
+		document.getElementById("alertMessage").innerHTML=  `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+	}
+}
 async function getUser(){
 	let ersUser = await fetch("http://localhost:8080/ers/serv2/getUser");
 	ersUser = await ersUser.json();
@@ -31,7 +41,7 @@ async function getUserReimbs(){
 		if(reimb.receipt==""){
 			imTD.innerHTML=" ";
 		}else{
-			imTD.innerHTML=`<img style="max-width:25px;" src="data:image/jpeg;base64,${reimb.receipt}">`;
+			imTD.innerHTML=`<img style="max-width:25px; max-height:25px;" src="data:image/jpeg;base64,${reimb.receipt}">`;
 		}		
 		newTR.append(idTD);
 		newTR.append(imTD);

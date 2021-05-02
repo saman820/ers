@@ -26,8 +26,19 @@ function getSessUser() {
 }*/
 console.log("connected");
 window.onload = function(){
+	getMessage();
 	getUser();
 	getManagers();
+}
+async function getMessage(){
+	let mes= await fetch("http://localhost:8080/ers/serv2/getMessage");
+	mes = await mes.json();
+	console.log(mes);
+	let mesCla= await fetch("http://localhost:8080/ers/serv2/getMessageClass");
+	mesCla = await mesCla.json();
+	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
+		document.getElementById("alertMessage").innerHTML=   `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+	}
 }
 
 async function getUser(){

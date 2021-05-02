@@ -18,7 +18,7 @@ public class MainDriver {
 	public static void main(String[] args) {
 	
 		
-//		ReimbDaoImpl reimb = new ReimbDaoImpl();
+		ReimbDaoImpl reimb = new ReimbDaoImpl();
 //		ReimbUserDaoImpl reimbUser = new ReimbUserDaoImpl();
 //		
 //		String saltt1= new Salt().generateSalt(512).get();
@@ -30,7 +30,7 @@ public class MainDriver {
 		
 		
 //		reimb.insert(new ErsReimbursement(160.6,"CAD",1001,1001,2));
-//		System.out.println(reimb.getAll());
+		System.out.println(reimb.getAll());
 //		System.out.println(reimb.getAllByUser(1001));
 //		System.out.println(reimb.getAllByResolver(1000));
 //		System.out.println(reimb.getOne(10004));

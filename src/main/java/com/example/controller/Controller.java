@@ -21,13 +21,12 @@ public class Controller {
 		reimbUser = new ReimbUserDaoImpl();
 	}
 	public String login(HttpServletRequest req) {
-		System.out.println("in login");
 		if(reimbUser.validateLogin(req.getParameter("uName"), req.getParameter("pWord"))) {
 			req.getSession().setAttribute("userName",req.getParameter("uName"));
 			ErsUser cUser= new ReimbUserDaoImpl().getOneByUserName(req.getParameter("uName"));
 			req.getSession().setAttribute("currentUser", cUser);
-			req.getSession().setAttribute("message", "Login syccessful!");
-			req.getSession().setAttribute("messageClass", "alert-success");
+//			req.getSession().setAttribute("message", "Login syccessful!");
+//			req.getSession().setAttribute("messageClass", "alert-success");
 			
 			if(reimbUser.validateFinanceByUserName(req.getParameter("uName"))) {
 				return"html/fhome.html";
@@ -66,7 +65,17 @@ public class Controller {
 		String email= req.getParameter("email");
 		int typeId= Integer.parseInt(req.getParameter("role"));
 		ErsUser newUser = new ErsUser(uName,pWord,fname,lname,email,typeId);
-		new ReimbUserDaoImpl().insert(newUser);
+		try {
+			new ReimbUserDaoImpl().insert(newUser);
+			req.getSession().setAttribute("message", "User successfully added");
+			req.getSession().setAttribute("messageClass", "alert-success");
+			return "html/index.html";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			req.getSession().setAttribute("message", "An error happened");
+			req.getSession().setAttribute("messageClass", "alert-danger");
+		}
 		return "html/index.html";
 	}
 	public String createReimb(HttpServletRequest req) {
@@ -88,8 +97,17 @@ public class Controller {
 			String description = req.getParameter("description");
 			int authorId = ((ErsUser) req.getSession().getAttribute("currentUser")).getId();
 			ErsReimbursement newReimb = new ErsReimbursement(amount,currency, description,image,authorId,resolverId,typeId);
-			new ReimbDaoImpl().insert(newReimb);
-			return "html/home.html";
+			try {
+				new ReimbDaoImpl().insert(newReimb);
+				req.getSession().setAttribute("message", "Your ticket was successfully created");
+				req.getSession().setAttribute("messageClass", "alert-success");
+				return "html/home.html";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				req.getSession().setAttribute("message", "An error happened");
+				req.getSession().setAttribute("messageClass", "alert-danger");
+			}
 		}	
 		return "html/index.html";
 	}
@@ -125,6 +143,7 @@ public class Controller {
 			cReimb.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(cReimb.getResolverId()).getUserName());
 			req.getSession().setAttribute("currentReimb", cReimb);
 			return "html/update-reimb.html";
+			
 		}
 		return "html/index.html";
 	}
@@ -134,6 +153,7 @@ public class Controller {
 			cReimb.setAuthorUserName(new ReimbUserDaoImpl().getOneByUserId(cReimb.getAuthorId()).getUserName());
 			cReimb.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(cReimb.getResolverId()).getUserName());
 			req.getSession().setAttribute("currentReimb", cReimb);
+			System.out.println("hi");
 			return "html/fupdate-reimb.html";
 		}
 		return "html/index.html";
@@ -152,8 +172,17 @@ public class Controller {
 			String description = req.getParameter("description");
 			ErsReimbursement cReimb = new ReimbDaoImpl().getOne(((ErsReimbursement) req.getSession().getAttribute("currentReimb")).getId());
 			ErsReimbursement newReimb = new ErsReimbursement(amount,currency, description,image,resolverId,typeId);
-			new ReimbDaoImpl().update(cReimb.getId(), newReimb);
-			return "html/home.html";
+			try {
+				new ReimbDaoImpl().update(cReimb.getId(), newReimb);
+				req.getSession().setAttribute("message", "Ticket was successfully updated");
+				req.getSession().setAttribute("messageClass", "alert-success");
+				return "html/home.html";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				req.getSession().setAttribute("message", "An error happened");
+				req.getSession().setAttribute("messageClass", "alert-danger");
+			}
 		}
 		return "html/index.html";
 	}
@@ -161,16 +190,32 @@ public class Controller {
 		if(req.getSession().getAttribute("currentUser")!=null) {
 			int status = Integer.parseInt(req.getParameter("status"));
 			ErsReimbursement cReimb = new ReimbDaoImpl().getOne(((ErsReimbursement) req.getSession().getAttribute("currentReimb")).getId());
-			new ReimbDaoImpl().setStatus(cReimb.getId(), status);
-			return "html/fhome.html";
+			try {
+				new ReimbDaoImpl().setStatus(cReimb.getId(), status);
+				req.getSession().setAttribute("message", "Ticket was successfully updated");
+				req.getSession().setAttribute("messageClass", "alert-success");
+				return "html/fhome.html";
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.getSession().setAttribute("message", "An error happened");
+				req.getSession().setAttribute("messageClass", "alert-danger");
+			}
 		}
 		return "html/index.html";
 	}
 	public String deleteReimb(HttpServletRequest req) {
 		if(req.getSession().getAttribute("currentUser")!=null) {
 			ErsReimbursement cReimb = new ReimbDaoImpl().getOne(((ErsReimbursement) req.getSession().getAttribute("currentReimb")).getId());
-			new ReimbDaoImpl().delete(cReimb.getId());
-			return "html/home.html";
+			try {
+				new ReimbDaoImpl().delete(cReimb.getId());
+				req.getSession().setAttribute("message", "Ticket was successfully deleted");
+				req.getSession().setAttribute("messageClass", "alert-success");
+				return "html/home.html";
+			} catch (Exception e) {
+				e.printStackTrace();
+				req.getSession().setAttribute("message", "An error happened");
+				req.getSession().setAttribute("messageClass", "alert-danger");
+			}
 		}
 		return "html/index.html";
 	}

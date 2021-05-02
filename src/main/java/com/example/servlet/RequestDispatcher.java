@@ -15,7 +15,6 @@ public class RequestDispatcher {
 	}
 	public String process(HttpServletRequest req) throws ServletException, IOException {
 		String uri = req.getRequestURI();
-		System.out.println(uri);
 		switch(uri) {
 		/*
 		 * case "/ers" : return "html/index.html"; case "/ers/" : return

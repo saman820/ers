@@ -38,7 +38,6 @@ public class JSONMasterServlet extends HttpServlet{
 		String uri = req.getRequestURI();
 		switch(uri) {
 		case "/ers/serv2/getUser" :
-			System.out.println("in getUser");
 			ErsUser user = new ReimbUserDaoImpl().getOneByUserName((String) req.getSession().getAttribute("userName"));
 			res.getWriter().write(new ObjectMapper().writeValueAsString(user));
 			break;
@@ -72,8 +71,17 @@ public class JSONMasterServlet extends HttpServlet{
 			ErsReimbursement cReimb = (ErsReimbursement) req.getSession().getAttribute("currentReimb");
 			res.getWriter().write(new ObjectMapper().writeValueAsString(cReimb));
 			break;
+		case "/ers/serv2/getMessage":
+			String message= (String) req.getSession().getAttribute("message");
+			res.getWriter().write(new ObjectMapper().writeValueAsString(message));
+			req.getSession().setAttribute("message", null);
+			break;
+		case "/ers/serv2/getMessageClass":
+			String messageClass= (String) req.getSession().getAttribute("messageClass");
+			res.getWriter().write(new ObjectMapper().writeValueAsString(messageClass));
+			req.getSession().setAttribute("messageClass", null);
+			break;
 		default:
-			System.out.println("it works");
 			req.getRequestDispatcher(new RequestDispatcher().process(req)).forward(req,res);
 		}
 		
