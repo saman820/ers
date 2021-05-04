@@ -2,7 +2,6 @@ package com.example.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,19 +15,22 @@ import com.example.model.ErsReimbursement;
 import com.example.model.ErsUser;
 
 public class Controller {
-	ReimbUserDaoImpl reimbUser;
+	ReimbUserDaoImpl reUser =new ReimbUserDaoImpl();
+	ReimbDaoImpl rei =new ReimbDaoImpl();
+	public Controller(ReimbUserDaoImpl reUser, ReimbDaoImpl rei) {
+		this.reUser = reUser;
+		this.rei =rei;
+	}
 	public Controller() {
-		reimbUser = new ReimbUserDaoImpl();
+		// TODO Auto-generated constructor stub
 	}
 	public String login(HttpServletRequest req) {
-		if(reimbUser.validateLogin(req.getParameter("uName"), req.getParameter("pWord"))) {
+		if(reUser.validateLogin(req.getParameter("uName"), req.getParameter("pWord"))) {
 			req.getSession().setAttribute("userName",req.getParameter("uName"));
-			ErsUser cUser= new ReimbUserDaoImpl().getOneByUserName(req.getParameter("uName"));
+			ErsUser cUser= reUser.getOneByUserName(req.getParameter("uName"));
 			req.getSession().setAttribute("currentUser", cUser);
-//			req.getSession().setAttribute("message", "Login syccessful!");
-//			req.getSession().setAttribute("messageClass", "alert-success");
 			
-			if(reimbUser.validateFinanceByUserName(req.getParameter("uName"))) {
+			if(reUser.validateFinanceByUserName(req.getParameter("uName"))) {
 				return"html/fhome.html";
 			}		
 			return "html/home.html";
@@ -41,7 +43,7 @@ public class Controller {
 			sesUser = ((ErsUser) req.getSession().getAttribute("currentUser")).getUserName();
 		}
 		if(sesUser!=null) {			
-			if(reimbUser.validateFinanceByUserName(sesUser)) {
+			if(reUser.validateFinanceByUserName(sesUser)) {
 				return"html/fhome.html";
 			}		
 			return "html/home.html";

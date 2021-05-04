@@ -18,7 +18,7 @@
     <filter-name>sesFilter</filter-name>
     <url-pattern>/*</url-pattern>
     <dispatcher>REQUEST</dispatcher>
-  </filter-mapping>   -->
+  </filter-mapping>  -->
   
   
   <servlet>
@@ -47,6 +47,14 @@
   	<servlet-name>MasterServlet</servlet-name>
   	<url-pattern>/index.html</url-pattern>
   </servlet-mapping>
+<!--   <servlet>
+  	<servlet-name>MasterServlet</servlet-name>
+  	<servlet-class>com.example.servlet.MasterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MasterServlet</servlet-name>
+  	<url-pattern>/*</url-pattern>
+  </servlet-mapping> -->
   
 
 

@@ -14,6 +14,7 @@ async function getMessage(){
 	mesCla = await mesCla.json();
 	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
 		document.getElementById("alertMessage").innerHTML=  `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+		setTimeout(function(){ document.getElementById("alertMessage").style.display="none"; }, 3000);
 	}
 }
 
@@ -32,7 +33,6 @@ async function getUser() {
 	let aText = document.createTextNode(ersUser.userName);
 	newA.appendChild(aText);
 	document.getElementById("id2").append(newA);
-	console.log(ersUser);
 }
 
 async function getUserReimbs() {
@@ -40,7 +40,6 @@ async function getUserReimbs() {
 	reimbs = await reimbs.json();
 	/*rsRef=reimbs;*//*whay the rsRef keeps changing!!!!*/
 	rsRef = reimbs;
-	console.info(reimbs);
 	if (reimbs.length == 0) {
 		document.getElementById("h2").innerText = "There are no reimbursement ticket";
 		document.getElementById("reimbTable").style.display = "none";
@@ -146,11 +145,11 @@ var nonLinearStepSlider = document.getElementById('slider-non-linear-step');
 noUiSlider.create(nonLinearStepSlider, {
 	start: [100, 2000],
 	range: {
-		'min': [0, 30],
-		'30%': [100, 300],
-		'50%': [500, 1000],
-		'70%': [2000, 5000],
-		'90%': [7000, 20000],
+		'min': [0, 0],
+		'30%': [500, 10],
+		'50%': [2000, 100],
+		'70%': [5000, 1000],
+		'90%': [20000, 2000],
 		'max': [200000]
 	}
 });

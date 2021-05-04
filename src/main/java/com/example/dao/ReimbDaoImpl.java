@@ -25,7 +25,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			String sql = "select * from ers_reimbursement";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting All Reimbursements");
 			while(rs.next()) {
 				reimbList.add(new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) ));
 			}
@@ -43,7 +43,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, authorId);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting all reeimbursements by user authorID");
 			while(rs.next()) {
 				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 				rei.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getResolverId()).getUserName());
@@ -64,7 +64,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, resolverId);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting all reimbursements by resolver ID");
 			while(rs.next()) {
 				ErsReimbursement rei=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 				rei.setResolverUserName(new ReimbUserDaoImpl().getOneByUserId(rei.getResolverId()).getUserName());
@@ -86,7 +86,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting one reibmursement by id");
 			while(rs.next()) {
 				reimb=new ErsReimbursement(rs.getInt(1), rs.getDouble(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getBytes(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11) );
 			}
@@ -111,7 +111,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			ps.setBytes(6, reimb.getReceipt());
 			ps.setInt(7, id);
 			ps.executeUpdate();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in updating a reimbursemnt");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			new Logging().log.error(e.getMessage());
@@ -130,7 +130,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			ps.setInt(1, statusId);
 			ps.setInt(2, reimbId);	
 			ps.executeUpdate();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in setting the status of a reimbursement");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			new Logging().log.error(e.getMessage());
@@ -151,7 +151,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			cs.setInt(7, reimb.getResolverId());
 			cs.setInt(8, reimb.getTypeId());
 			cs.execute();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("creating a new ticket");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			new Logging().log.error(e.getMessage());
@@ -184,7 +184,7 @@ public class ReimbDaoImpl implements ReimbDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, reimbId);
 			ps.executeUpdate();		
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("deleting a new ticket");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			new Logging().log.error(e.getMessage());

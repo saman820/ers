@@ -10,6 +10,7 @@ async function getMessage(){
 	mesCla = await mesCla.json();
 	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
 		document.getElementById("alertMessage").innerHTML=  `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+		setTimeout(function(){ document.getElementById("alertMessage").style.display="none"; }, 3000);
 	}
 }
 async function getUser(){
@@ -34,7 +35,6 @@ async function getManagers(){
 	}
 	let reimb = await fetch("http://localhost:8080/ers/serv2/getCurrentreimb");
 	reimb = await reimb.json();
-	console.log(reimb);
 	document.getElementById('amount').setAttribute('value',reimb.amount);	
 	selectItemByValue(document.getElementById('currency'),reimb.ersCurrency);	
 	if(reimb.resolverUserName!=null){selectItemByValue(document.getElementById('managers'),reimb.resolverUserName);}	

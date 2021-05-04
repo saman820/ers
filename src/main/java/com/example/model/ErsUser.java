@@ -18,6 +18,8 @@ public class ErsUser {
 		return userName;
 	}
 	public void setUserName(String userName) {
+		if(userName==null)
+			{throw new IllegalArgumentException("username cannot be null");}
 		this.userName = userName;
 	}
 	public String getPassWord() {

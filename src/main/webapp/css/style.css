@@ -12,6 +12,7 @@ body {
 	font-family: "Montserrat", sans-serif;
 	font-size:19px;
 }
+
 #container {
 	background-color : #232323;
 	color: #cf9d4c;
@@ -115,9 +116,18 @@ a{
 	display:none;
 	/* display:flex; */
 	flex-direction:horizontal;
-	flex-wrap:no-wrap;
-	
+	flex-wrap:no-wrap;	
 }
+#slider-non-linear-step-value{
+	color:yello;
+}
+#cur,#auth,#stat,#typ,#filterButton, #slider-non-linear-step, .noUi-touch-area, .noUi-handle{
+	background-color:#c7c7ab;
+}
+  .noUi-handle, .noUi-target,.noUi-connects ,div.noUi-handle::before,div.noUi-handle::after{
+ border:1px solid #232323;
+ text-decoration:none;
+ }
 #slider{
 	width:30%;
 	

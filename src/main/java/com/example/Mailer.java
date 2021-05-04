@@ -34,7 +34,7 @@ public class Mailer {
 				message.setFrom(new InternetAddress(from));
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 				message.setSubject("Welcome to ERS");
-				message.setText("Welcome to Employee Reimbursement system, "+ username+"\nYour hashed password is: "+password);
+				message.setText("Welcome to Employee Reimbursement system, "+ username);
 
 				System.out.println("sending...");
 				Transport.send(message);

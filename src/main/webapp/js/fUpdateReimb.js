@@ -12,6 +12,7 @@ async function getMessage(){
 	mesCla = await mesCla.json();
 	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
 		document.getElementById("alertMessage").innerHTML=   `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+		setTimeout(function(){ document.getElementById("alertMessage").style.display="none"; }, 3000);
 	}
 }
 

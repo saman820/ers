@@ -24,7 +24,6 @@ function getSessUser() {
 
 	xhttp.send();
 }*/
-console.log("connected");
 window.onload = function(){
 	getMessage();
 	getUser();
@@ -33,11 +32,11 @@ window.onload = function(){
 async function getMessage(){
 	let mes= await fetch("http://localhost:8080/ers/serv2/getMessage");
 	mes = await mes.json();
-	console.log(mes);
 	let mesCla= await fetch("http://localhost:8080/ers/serv2/getMessageClass");
 	mesCla = await mesCla.json();
 	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
 		document.getElementById("alertMessage").innerHTML=   `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+		setTimeout(function(){ document.getElementById("alertMessage").style.display="none"; }, 3000);
 	}
 }
 
@@ -50,19 +49,16 @@ async function getUser(){
 	let aText = document.createTextNode(ersUser.userName);
 	newA.appendChild(aText);
 	document.getElementById("id2").append(newA);
-	console.log(ersUser); 
 }
 
 async function getManagers(){
 	let managers = await fetch ("http://localhost:8080/ers/serv2/getManagerNames");
 	managers = await managers.json();
-	console.log(managers);
 	for(manager of managers){
 		let newOption= document.createElement('option');
 		newOption.innerHTML=`${manager}`;
 		newOption.setAttribute('value',`${manager}`);
 		document.getElementById("managers").append(newOption);
-		console.log(newOption);
 	}	
 }
 

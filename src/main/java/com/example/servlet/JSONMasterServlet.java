@@ -15,6 +15,9 @@ import com.example.model.ErsUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONMasterServlet extends HttpServlet{
+	ReimbUserDaoImpl reUser =new ReimbUserDaoImpl();
+	ReimbDaoImpl rei =new ReimbDaoImpl();
+	
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
 //		if(reimbUser.validateLogin(req.getParameter("uName"), req.getParameter("pWord"))) {
@@ -38,33 +41,33 @@ public class JSONMasterServlet extends HttpServlet{
 		String uri = req.getRequestURI();
 		switch(uri) {
 		case "/ers/serv2/getUser" :
-			ErsUser user = new ReimbUserDaoImpl().getOneByUserName((String) req.getSession().getAttribute("userName"));
+			ErsUser user = reUser.getOneByUserName((String) req.getSession().getAttribute("userName"));
 			res.getWriter().write(new ObjectMapper().writeValueAsString(user));
 			break;
 		case "/ers/serv2/getReimbs":
 			ErsUser cUser= (ErsUser)req.getSession().getAttribute("currentUser");
-			List<ErsReimbursement> reimbs = new ReimbDaoImpl().getAllByUser(cUser.getId());
+			List<ErsReimbursement> reimbs = rei.getAllByUser(cUser.getId());
 			for(ErsReimbursement reimb:reimbs) {
-				String str = new ReimbUserDaoImpl().getOneByUserId(reimb.getResolverId()).getUserName();
+				String str = reUser.getOneByUserId(reimb.getResolverId()).getUserName();
 				reimb.setResolverUserName(str);
 			}
 			res.getWriter().write(new ObjectMapper().writeValueAsString(reimbs));
 			break;
 		case "/ers/serv2/getFReimbs":
 			ErsUser cFUser= (ErsUser)req.getSession().getAttribute("currentUser");
-			List<ErsReimbursement> fReimbs = new ReimbDaoImpl().getAllByResolver(cFUser.getId());
+			List<ErsReimbursement> fReimbs =rei.getAllByResolver(cFUser.getId());
 			for(ErsReimbursement reimb:fReimbs) {
-				String str = new ReimbUserDaoImpl().getOneByUserId(reimb.getResolverId()).getUserName();
+				String str = reUser.getOneByUserId(reimb.getResolverId()).getUserName();
 				reimb.setResolverUserName(str);
 			}
 			res.getWriter().write(new ObjectMapper().writeValueAsString(fReimbs));
 			break;
 		case "/ers/serv2/getManagerNames":	
-			List<String> mgs = new ReimbUserDaoImpl().getAllFManagersUsers();
+			List<String> mgs = reUser.getAllFManagersUsers();
 			res.getWriter().write(new ObjectMapper().writeValueAsString(mgs));
 			break;
 		case "/ers/serv2/getAuthorNames":	
-			List<String> aus = new ReimbUserDaoImpl().getAllUsers();
+			List<String> aus = reUser.getAllUsers();
 			res.getWriter().write(new ObjectMapper().writeValueAsString(aus));
 			break;
 		case "/ers/serv2/getCurrentreimb":

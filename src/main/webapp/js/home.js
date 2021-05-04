@@ -11,6 +11,7 @@ async function getMessage(){
 	mesCla = await mesCla.json();
 	if(mes!=null && mes!="" && mesCla!=null && mesCla!=""){
 		document.getElementById("alertMessage").innerHTML=  `<div class="alert ${mesCla} alert-dismissible fade show">${mes }<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+		setTimeout(function(){ document.getElementById("alertMessage").style.display="none"; }, 3000);
 	}
 }
 async function getUser(){
@@ -22,13 +23,11 @@ async function getUser(){
 	let aText = document.createTextNode(ersUser.userName);
 	newA.appendChild(aText);
 	document.getElementById("id2").append(newA);
-	console.log(ersUser); 
 }
 
 async function getUserReimbs(){
 	let reimbs = await fetch("http://localhost:8080/ers/serv2/getReimbs");
 	reimbs = await reimbs.json();
-	console.info(reimbs);
 	if(reimbs.length==0){
 		document.getElementById("h2").innerText= "You have no reimbursement ticket";
 		document.getElementById("reimbTable").style.display="none";

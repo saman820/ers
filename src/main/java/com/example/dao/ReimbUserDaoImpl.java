@@ -26,7 +26,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			String sql = "select * from ers_users where user_role_id=0";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("getting all finance managers");
 			List <ErsUser> users = new ArrayList<>();
 			while(rs.next()) {
 				users.add(new ErsUser(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7)));
@@ -43,7 +43,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			String sql = "select ers_username from ers_users where user_role_id=0";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("getting a liost of all finance manager usernames");
 			List <String> managers = new ArrayList<>();
 			while(rs.next()) {
 				managers.add(rs.getString(1));
@@ -61,7 +61,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			String sql = "select ers_username from ers_users";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting all usernames");
 			List <String> managers = new ArrayList<>();
 			while(rs.next()) {
 				managers.add(rs.getString(1));
@@ -81,7 +81,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,uName);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting a user by its username");
 			ErsUser user = null;
 			while(rs.next()) {
 				user = new ErsUser(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
@@ -99,7 +99,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,userId);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in getting a username by their id");
 			ErsUser user = null;
 			while(rs.next()) {
 				user = new ErsUser(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
@@ -118,7 +118,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,username);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in validating login");
 			while(rs.next()) {
 			return(new Hashing().verifyPassword(password, rs.getString(3), rs.getString(8)));
 			}
@@ -140,7 +140,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1,username);
 			ResultSet rs = ps.executeQuery();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in validating finance manager");
 			while(rs.next()) {
 				if((rs.getInt(7)==0))
 					return true;
@@ -169,7 +169,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			cs.setInt(7,user.getRoleId());
 			cs.setString(8,salt);
 			cs.execute();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in creating a new user");
 			new Mailer().sendMail(user.getEmail(), user.getUserName(), user.getPassWord());
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -193,7 +193,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			ps.setInt(7, id);
 			ps.setString(8, salt);
 			ps.executeUpdate();
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in updating a user");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			new Logging().log.error(e.getMessage());
@@ -207,7 +207,7 @@ public class ReimbUserDaoImpl implements ReimbUserDao{
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ps.executeUpdate();	
-			new Logging().log.debug("in Dao");
+			new Logging().log.debug("in deleting a user");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			new Logging().log.error(e.getMessage());

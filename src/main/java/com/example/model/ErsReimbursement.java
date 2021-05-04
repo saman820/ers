@@ -1,7 +1,5 @@
 package com.example.model;
 
-import java.awt.image.BufferedImage;
-import java.io.InputStream;
 
 public class ErsReimbursement {
 //	enum currency{
