@@ -8,7 +8,7 @@ public class ReimbDbConnection {
 
 	private final String URL = "jdbc:postgresql://rev-can-training.cevrrymkkbmb.us-east-2.rds.amazonaws.com:5432/project1db";
 	private final String USERNAME="project1user";
-	private final String PASSWORD= "passw0rd";
+	private final String PASSWORD= "passgyvyutkykfyg/uhoihouiyuftdryxgfchgygut7ir68dtgjkgut7i6tfujkug/iy.w0rd";
 	
 	public Connection getDbConnection() throws SQLException{
 		try {
